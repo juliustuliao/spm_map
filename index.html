@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Map</title>
+    <title>Leaflet Map with Google Sheets Data</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
         #map {
@@ -56,10 +56,10 @@
                         const rows = jsonData.table.rows;
                         const users = rows.map(row => {
                             return {
-                                name: row.c[1].v,
-                                lat: parseFloat(row.c[2].v),
-                                lng: parseFloat(row.c[3].v),
-                                vehicle: row.c[4].v // Assuming the vehicle data is in the 5th column (index 4)
+                                name: row.c[1] ? row.c[1].v : 'Unknown',
+                                lat: row.c[2] ? parseFloat(row.c[2].v) : 0,
+                                lng: row.c[3] ? parseFloat(row.c[3].v) : 0,
+                                vehicle: row.c[4] ? row.c[4].v : 'car'
                             };
                         });
                         addMarkers(users);
